@@ -92,11 +92,6 @@ async function searchYoutube(valor) {
     var str = JSON.stringify(response.result);
     console.log(valor);
     console.log(response.result);
-    response.result.items.filter((video)=>{
-      if(video.snippet.title.includes("Tokyo Ghoul")){
-        //Fazer condição e terminar
-      }
-    })
     var id = response.result.items[0].id.videoId;
     loadVideo(id, response.result);
   });

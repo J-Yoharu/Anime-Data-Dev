@@ -28,9 +28,9 @@ async function loadHome(){
   //adicionando informações a info
   document.getElementById('synopsis').innerHTML=animeDados.synopsis;
   document.getElementById('episodes').innerHTML=animeDados.episodes +' episodios, '+animeDados.duration;
-
+  
   //Adicionando vídeo Trailer
-  setTimeout(() => {searchYoutube(animeDados.title + ' Official Trailer');}, 500);
+  setTimeout(() => {searchYoutube(animeDados.title + ' Official Trailer');}, 600);
 }
 
 function loadOpening(obj){
