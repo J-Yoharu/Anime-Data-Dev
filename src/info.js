@@ -1,14 +1,14 @@
+import {anime} from "./search.js";
+
 var title = document.getElementById("animeTitle");
 var videoTitle = document.getElementById("videoTitle");
 var frameVideo = document.getElementById("youtubeVideo");
 var info = document.getElementById("info");
 var openings = document.getElementById("opening");
-
-async function loadHome(){
+async function loadInfo(){
   login();
   //Fazendo a requisição dos dados do anime especifico
   var animeDados = await anime.data(localStorage.mal_id);
-
   //adicionando titulo ao vídeo anime referenciado
   title.innerHTML= '<h2>' + animeDados.title + '</h2>';
   videoTitle.innerHTML= '<h2>' + animeDados.title+' - Trailer' + '</h2>';
@@ -28,7 +28,7 @@ async function loadHome(){
   //adicionando informações a info
   document.getElementById('synopsis').innerHTML=animeDados.synopsis;
   document.getElementById('episodes').innerHTML=animeDados.episodes +' episodios, '+animeDados.duration;
-  
+
   //Adicionando vídeo Trailer
   setTimeout(() => {searchYoutube(animeDados.title + ' Official Trailer');}, 600);
 }
@@ -50,6 +50,10 @@ function loadVideo(id,data){
   document.getElementById("colVideo").innerHTML = iframe;
   document.getElementById("videoTitle").innerHTML = "<h3>" + data.items[0].snippet.title + "</h3>";
 }
+window.loadOpening = loadOpening;
+window.loadEnding = loadEnding;
+window.loadInfo = loadInfo;
+
 function trigger(obj){
   searchYoutube(obj.id);
 }

@@ -1,7 +1,10 @@
+import {loaderCarousel,createCarousel,setSearchArea} from "./carousel.js";
+import {anime} from "./search.js";
+
 async function loadHome(){
   // SEMPRE CHAMAR O CREATE LOADER ANTES DE CHAMAR O CAROUSEL, PARA CRIAR O CONTAINER PARA O CAROUSEL
-  LoaderCarousel('loader1',"carouselContainer");
-  LoaderCarousel('loader2',"carouselContainer");
+  loaderCarousel('loader1',"carouselContainer");
+  loaderCarousel('loader2',"carouselContainer");
 
   let x = await anime.week();
   createCarousel(x,"loader1","Animes da semana");
@@ -12,6 +15,7 @@ async function loadHome(){
   }, 4000);
 
 }
+window.loadHome = loadHome;
 
 function home(){
   document.getElementById("searchContainer").style.display="none";
@@ -33,6 +37,7 @@ async function homeSearch(){
     }
   }
 }
+window.homeSearch = homeSearch;
 
 async function homeSearchClick(){
   if(document.getElementById("inputAnime").value.length <=2){
@@ -44,6 +49,7 @@ async function homeSearchClick(){
     setSearchArea(y,"searchContainer","Sua pesquisa: " + animeName);
   }
 }
+window.homeSearchClick = homeSearchClick;
 
 //Criação da barra de pesquisa
 function createSearchBar(id){
@@ -71,7 +77,7 @@ function createSearchBar(id){
 }
 
 //Trocando input de pesquisa de local
-function toggleSearchBar(obj){
+export function toggleSearchBar(obj){
   if(obj.id == 'btnHome'){
     localStorage.sco = 60;
     document.getElementById("searchNav").innerHTML = "";
@@ -87,10 +93,11 @@ function toggleSearchBar(obj){
     document.getElementById("content").style.display="none";
     createSearchBar("searchNav");
   }
-
-
 }
+
+window.toggleSearchBar = toggleSearchBar;
 
 function releaseMal(obj){
   localStorage.mal_id = obj.id;
 }
+window.releaseMal = releaseMal;

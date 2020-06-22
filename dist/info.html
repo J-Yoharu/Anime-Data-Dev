@@ -51,7 +51,7 @@
 
     </style>
   </head>
-  <body onload="loadHome()">
+  <body onload="loadInfo()">
     <div class="wrapper" style="background-color:#001829">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-light position-abolute d-absolute bg-light" id="navAnchor">
@@ -219,9 +219,7 @@
     <script type="text/javascript" src="../src/templateEngine.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="../src/auth.js"></script>
-    <script src="../src/search.js"></script>
     <script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
-    <script type="text/javascript" src="../src/info.js"></script>
     <script src="https://unpkg.com/mustache@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -233,5 +231,6 @@
       $('[data-toggle="tooltip"]').tooltip()
     });
     </script>
+    <script type="text/javascript" src="./main.js"></script>
   </body>
 </html>

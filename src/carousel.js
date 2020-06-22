@@ -8,7 +8,8 @@ var ranker=false;
 var arrayScroll = [];
 
 //CRIANDO UM CAROUSEL PASSANDO UM ARRAY (NORMALMENTE PASSANDO UM ARRAY TRABALHADO).
-function createCarousel(array,idAppend,titleParameter){
+export function createCarousel(array,idAppend,titleParameter){
+  console.log(idAppend);
   document.getElementById(idAppend).innerHTML="";
   //FUNÇÃO DE INICIALIZAÇÃO DO TOOLTIP
   $(function () {
@@ -41,7 +42,7 @@ divNext.setAttribute("class","btnCarousel next position-absolute d-flex align-it
 divNext.setAttribute("style","right:0;top:0;height:16rem");
 divNext.setAttribute("id",'Next'+idCarousel);
 
-iconNext = document.createElement("span");
+var iconNext = document.createElement("span");
 iconNext.setAttribute("class","fa fa-3x fa-arrow-circle-right p-1");
 iconNext.setAttribute("style","opacity: 0.8;");
 divNext.append(iconNext);
@@ -51,7 +52,7 @@ divPrev.setAttribute("class","btnCarousel prev position-absolute d-flex align-it
 divPrev.setAttribute("style","left:0;top:0;height:16rem;");
 divPrev.setAttribute("id",'Prev'+idCarousel);
 
-iconPrev = document.createElement("span");
+var iconPrev = document.createElement("span");
 iconPrev.setAttribute("class","fa fa-3x fa-arrow-circle-left p-1");
 iconPrev.setAttribute("style","opacity: 0.8;");
 divPrev.append(iconPrev);
@@ -121,9 +122,9 @@ function tooltipCopy(component){
   $('#'+component.id).tooltip('show');
   $('.card-title').attr("title", "Clique para copiar o título").tooltip('_fixTitle');
 }
-
+window.tooltipCopy = tooltipCopy;
 //FUNÇÃO PARA A CRIAÇÃO DA ÁREA DE PESQUISA COM OS CARDS.
-function setSearchArea(array, idAppend, titleS){
+export function setSearchArea(array, idAppend, titleS){
   let qtdCard=15;
 
   window.scrollTo(0,0);
@@ -177,6 +178,7 @@ function att(){
     }
   }
 }
+window.att = att;
 
 //FUNÇÃO PARA A CRIAÇÃO DE CARDS PASSANDO COMO PARÂMETRO O ARRAY COM AS INFORMAÇÕES
 function createCard(array,ranker){
@@ -253,7 +255,7 @@ function createCard(array,ranker){
     title.setAttribute("data-clipboard-text",item.title);
     title.innerHTML=item.title;
 
-    //ADICIONANDO A FUNÇÃO DE COPIAR NO TÍTULO AO CLICAR
+    // ADICIONANDO A FUNÇÃO DE COPIAR NO TÍTULO AO CLICAR
     new ClipboardJS('#t'+item.mal_id);
 
     cardBody.append(title);
@@ -266,7 +268,7 @@ function createCard(array,ranker){
 }
 
 //FUNÇÃO PARA CRIAR O LOADER DO CAROUSEL
-function LoaderCarousel(id,idAppend){
+export function loaderCarousel(id,idAppend){
   var container = document.createElement("div");
   container.setAttribute("class","row");
   container.setAttribute("id",id);

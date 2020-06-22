@@ -1,6 +1,5 @@
-
-
-anime = {
+import {toggleSearchBar} from "./index.js"
+export var anime = {
   async search(){
     try{
       let data = await connectionApi(animeSearch());
@@ -82,7 +81,7 @@ function dayOfTheWeek(){
   return dayOfTheWeek;
 }
 
-async function searchYoutube(valor) {
+export async function searchYoutube(valor) {
   var q = valor;
   var request = gapi.client.youtube.search.list({
     q: q,
