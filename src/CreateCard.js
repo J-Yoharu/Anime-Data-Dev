@@ -1,5 +1,6 @@
-function createCard(array,ranker){
+function createCard(array,badgeStyle=""){
     var cards=[];
+    try{
     array.forEach((item,i) => {
     var card = document.createElement("div");
     card.setAttribute("class","item card d-inline-flex m-2 rounded shadow-lg border");
@@ -16,22 +17,22 @@ function createCard(array,ranker){
       divLoader.append(loader);
       card.append(divLoader);
     }else{
-      var imageCard = document.createElement("img");
-      imageCard.setAttribute("class","card-img-top");
-      imageCard.setAttribute("src",item.image_url);
-      imageCard.setAttribute("style","height:13rem");
 
-      var linkImage = document.createElement("a");
-      linkImage.setAttribute("id",item.mal_id);
-      linkImage.setAttribute("target","_blank");
-      linkImage.setAttribute("href","info.html");
-      linkImage.setAttribute("onclick","releaseMal(this)");
-      linkImage.append(imageCard);
-      card.append(linkImage);
+        var imageCard = document.createElement("img");
+        imageCard.setAttribute("class","card-img-top");
+        imageCard.setAttribute("src",item.image_url);
+        imageCard.setAttribute("style","height:13rem");
 
+        var linkImage = document.createElement("a");
+        linkImage.setAttribute("id",item.mal_id);
+        linkImage.setAttribute("target","_blank");
+        linkImage.setAttribute("href","info.html");
+        linkImage.setAttribute("onclick","releaseMal(this)");
+        linkImage.append(imageCard);
+        card.append(linkImage);
     }
 
-    if(ranker){
+    if(badgeStyle=="triangle"){
       var rank = document.createElement("span");
       rank.setAttribute("class","position-absolute");
       // rank.setAttribute("style","right:10px;top:-5px;border-radius:0 0px 20px 20px"); style de cartão
@@ -46,7 +47,7 @@ function createCard(array,ranker){
     }
 
     if(item.score !=null){
-      if(!ranker){
+      if(badgeStyle!="triangle"){
         var badge = document.createElement("span");
         badge.setAttribute("class","badge badge-primary position-absolute p-1 rounded");
         badge.innerHTML="Score: "+item.score;
@@ -72,13 +73,27 @@ function createCard(array,ranker){
     title.innerHTML=item.title;
 
     //ADICIONANDO A FUNÇÃO DE COPIAR NO TÍTULO AO CLICAR
-    new ClipboardJS('#t'+item.mal_id);
+    // new ClipboardJS('#t'+item.mal_id);
 
     cardBody.append(title);
     card.append(cardBody);
     cards[i] = card;
   });
-
+}
+catch(err){
+  console.log("Provavelmente não foi passado o array como parâmetro, revise seu código com o erro: "+err);
+}
   //RETORNO COM O HTML DE TODOS OS CARDS CRIADOS DENTRO DO FOREACH DO ARRAY DE INFORMAÇÕES
+  //USADO COM O FOREACH. EX: CREATECARD(ARRAY,'TRIANGLE').FORAECH(FOO => DOCUMENT.BODY.APPEND(FOO));
   return cards;
 }
+
+//FUNÇÃO PARA MÚDAR O TÍTULO DO TOOLTIP PARA "COPIADO" QUANDO CLICAR ENCIMA
+function tooltipCopy(component){
+  //CRIA UM NOVO TÍTULO COM "COPIADO", MOSTRA ESSE TÍTULO E ALTERA DE VOLTA PARA O TÍTULO ORIGINAL.
+  $('.card-title').attr("title", "Copiado!").tooltip('_fixTitle');
+  $('#'+component.id).tooltip('show');
+  $('.card-title').attr("title", "Clique para copiar o título").tooltip('_fixTitle');
+}
+window.tooltipCopy = tooltipCopy;
+export default createCard;
