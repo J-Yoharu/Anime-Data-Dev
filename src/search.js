@@ -1,9 +1,7 @@
-import {toggleSearchBar} from "./index.js"
 export var anime = {
   async search(){
     try{
       let data = await connectionApi(animeSearch());
-      toggleSearchBar("");
       return data.data.results;
     }
     catch(error){
@@ -33,7 +31,6 @@ export var anime = {
   async data(id){
     try{
       let data = await connectionApi(animeData(id));
-      console.log(data.data);
       return data.data;
     }
     catch(error){
@@ -79,19 +76,4 @@ function dayOfTheWeek(){
     }
   });
   return dayOfTheWeek;
-}
-
-export async function searchYoutube(valor) {
-  var q = valor;
-  var request = gapi.client.youtube.search.list({
-    q: q,
-    part: 'snippet'
-  });
-  request.execute(function(response) {
-    var str = JSON.stringify(response.result);
-    console.log(valor);
-    console.log(response.result);
-    var id = response.result.items[0].id.videoId;
-    loadVideo(id, response.result);
-  });
 }

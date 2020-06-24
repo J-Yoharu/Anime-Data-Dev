@@ -4,7 +4,6 @@ if(document.title == 'Info'){
    condition = true;
 }
 
-console.log(condition);
 var data = {
     navBar:[
       {

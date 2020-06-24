@@ -1,12 +1,17 @@
 import {anime} from "./search.js";
+import {youtube, login} from "./youtube.js";
 
 var title = document.getElementById("animeTitle");
 var videoTitle = document.getElementById("videoTitle");
 var frameVideo = document.getElementById("youtubeVideo");
 var info = document.getElementById("info");
 var openings = document.getElementById("opening");
+
+
+
 async function loadInfo(){
   login();
+
   //Fazendo a requisição dos dados do anime especifico
   var animeDados = await anime.data(localStorage.mal_id);
   //adicionando titulo ao vídeo anime referenciado
@@ -30,7 +35,8 @@ async function loadInfo(){
   document.getElementById('episodes').innerHTML=animeDados.episodes +' episodios, '+animeDados.duration;
 
   //Adicionando vídeo Trailer
-  setTimeout(() => {searchYoutube(animeDados.title + ' Official Trailer');}, 600);
+  setTimeout(() => {youtube.search(animeDados.title + ' Official Trailer');}, 800);
+
 }
 
 function loadOpening(obj){
@@ -45,15 +51,17 @@ function loadEnding(){
   document.getElementById("opening").classList.add("d-none");
   document.getElementById("btnEnding").style.borderBottom='3px solid #007bff';
 }
-function loadVideo(id,data){
-  iframe = "<iframe id='YoutubeVideo' class='w-100' style='height:26rem' src='https://www.youtube.com/embed/" + id  + "' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>";
+export function loadVideo(id,data){
+  var iframe = "<iframe id='YoutubeVideo' class='w-100' style='height:26rem' src='https://www.youtube.com/embed/" + id  + "' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>";
   document.getElementById("colVideo").innerHTML = iframe;
   document.getElementById("videoTitle").innerHTML = "<h3>" + data.items[0].snippet.title + "</h3>";
 }
 window.loadOpening = loadOpening;
 window.loadEnding = loadEnding;
 window.loadInfo = loadInfo;
+window.loadVideo = loadVideo;
 
 function trigger(obj){
-  searchYoutube(obj.id);
+  youtube.search(obj.id);
 }
+window.trigger = trigger;
