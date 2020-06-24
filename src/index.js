@@ -39,6 +39,7 @@ async function homeSearch(){
     else{
       let animeName = document.getElementById("inputAnime").value
       let y = await anime.search();
+      toggleSearchBar("");
       setSearchArea(y,"searchContainer","Sua pesquisa: " + animeName);
     }
   }
@@ -52,6 +53,7 @@ async function homeSearchClick(){
   else{
     let animeName = document.getElementById("inputAnime").value
     let y = await anime.search();
+    toggleSearchBar("");
     setSearchArea(y,"searchContainer","Sua pesquisa: " + animeName);
   }
 }

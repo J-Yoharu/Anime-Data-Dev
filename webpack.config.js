@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: ['./node_modules/regenerator-runtime/runtime.js','./src/index.js'],
+  entry: ['./node_modules/regenerator-runtime/runtime.js','./src/index.js','./src/info.js'],
   devtool:'source-map',
   output: {
     filename: 'main.js',
